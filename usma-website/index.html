@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتحاد العاصمة - USMA 1937</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a1a1a;
+            border-bottom: 3px solid #e60000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e60000;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: #e60000;
+        }
+
+        .page-section {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page-section.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-container {
+            text-align: center;
+            padding: 40px 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-logo {
+            width: 250px;
+            max-width: 80%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(230, 0, 0, 0.4);
+            margin-bottom: 30px;
+            border: 2px solid #e60000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #e60000;
+        }
+
+        p.subtitle {
+            font-size: 20px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #e60000;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #b30000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ffffff;
+            color: #0d0d0d;
+            transform: translateY(-3px);
+        }
+
+        /* بطاقة التعريف بالنادي */
+        .about-card {
+            background-color: #161616;
+            border: 1px solid #333;
+            border-right: 4px solid #e60000;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 850px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: right;
+        }
+
+        .about-card h2 {
+            font-size: 26px;
+            color: #e60000;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-card p {
+            color: #cccccc;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .about-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            background-color: #0f0f0f;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #282828;
+        }
+
+        .about-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .about-info-item span.title {
+            color: #888888;
+            font-size: 13px;
+        }
+
+        .about-info-item span.value {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        /* بطاقة ملعب النادي في الواجهة الرئيسية */
+        .stadium-card {
+            background-color: #161616;
+            border: 1px solid #333;
+            border-top: 4px solid #e60000;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 850px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: right;
+        }
+
+        .stadium-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-bottom: 2px solid #e60000;
+        }
+
+        .stadium-content {
+            padding: 25px;
+        }
+
+        .stadium-content h2 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stadium-content p {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .stadium-details {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            background-color: #0f0f0f;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #282828;
+            justify-content: space-between;
+        }
+
+        .stadium-detail-item {
+            color: #aaaaaa;
+            font-size: 14px;
+        }
+
+        .stadium-detail-item strong {
+            color: #e60000;
+        }
+
+        /* تنسيقات الأقسام العامة */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: #e60000;
+            margin-bottom: 10px;
+        }
+
+        .titles-grid, .matches-grid, .squad-grid, .legends-grid, .fans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .title-card, .match-card, .squad-card, .legend-card, .fan-card {
+            background-color: #161616;
+            border: 1px solid #333;
+            border-right: 4px solid #e60000;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: right;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .fan-card.clickable {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .fan-card.clickable:hover {
+            border-color: #e60000;
+            box-shadow: 0 5px 25px rgba(230, 0, 0, 0.3);
+        }
+
+        .legend-card.eternal {
+            border-color: #ffcc00;
+            border-right-color: #ffcc00;
+            background: linear-gradient(135deg, #161616 0%, #261f00 100%);
+        }
+
+        .title-card:hover, .match-card:hover, .squad-card:hover, .legend-card:hover, .fan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(230, 0, 0, 0.2);
+            border-color: #e60000;
+        }
+
+        .title-card h3, .match-card h3, .squad-card h3, .legend-card h3, .fan-card h3 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-card h3 span, .match-card .badge, .squad-card .badge, .legend-card .badge, .fan-card .badge {
+            background-color: #e60000;
+            color: #fff;
+            font-size: 13px;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .match-card .badge.caf {
+            background-color: #ff9900;
+        }
+
+        .match-card .badge.cup {
+            background-color: #009933;
+        }
+
+        .match-card .badge.played {
+            background-color: #555555;
+        }
+
+        .match-teams {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 10px;
+        }
+
+        .match-score {
+            font-size: 20px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .match-info, .squad-list, .legend-desc, .fan-desc {
+            color: #aaaaaa;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .squad-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .squad-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #282828;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .squad-list li:last-child {
+            border-bottom: none;
+        }
+
+        .player-num {
+            color: #e60000;
+            font-weight: bold;
+        }
+
+        /* نافذة المعرض الصور (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            border: 2px solid #e60000;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            padding: 25px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #e60000;
+        }
+
+        .modal-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .modal-images-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #333;
+            object-fit: cover;
+            max-height: 350px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            width: 100%;
+            border-top: 1px solid #222;
+        }
+
+        @media(max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text" onclick="showPage('home')">USMA 1937</div>
+        <nav>
+            <a href="#" onclick="showPage('home')" id="nav-home" class="active">الرئيسية</a>
+            <a href="#" onclick="showPage('titles')" id="nav-titles">ألقاب النادي</a>
+            <a href="#" onclick="showPage('legends')" id="nav-legends">أساطير النادي</a>
+            <a href="#" onclick="showPage('fans')" id="nav-fans">مجموعات الأنصار</a>
+            <a href="#" onclick="showPage('matches')" id="nav-matches">جدول المباريات</a>
+            <a href="#" onclick="showPage('squad')" id="nav-squad">تشكيلة الفريق</a>
+            <a href="https://instagram.com/jalil_jalil10.1" target="_blank">تواصل معنا</a>
+        </nav>
+    </header>
+
+    <!-- الصفحة الرئيسية -->
+    <main id="home" class="page-section active">
+        <div class="hero-container">
+            <img src="usma.jpg" alt="شعار اتحاد العاصمة USMA 1937" class="hero-logo">
+            
+            <h1>مرحباً بكم في موقع <span>اتحاد العاصمة</span></h1>
+            <p class="subtitle">Les Rois d'Alger - ملوك العاصمة منذ 1937</p>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="showPage('titles')">ألقاب النادي</button>
+                <button class="btn btn-primary" onclick="showPage('legends')">أساطير النادي</button>
+                <button class="btn btn-primary" onclick="showPage('fans')">مجموعات الأنصار</button>
+                <button class="btn btn-primary" onclick="showPage('matches')">جدول المباريات</button>
+                <button class="btn btn-primary" onclick="showPage('squad')">تشكيلة الفريق</button>
+                <a href="https://instagram.com/jalil_jalil10.1" target="_blank" class="btn btn-secondary">تواصل معي</a>
+            </div>
+
+            <!-- بطاقة التعريف بالنادي -->
+            <div class="about-card">
+                <h2>🔴⚫ نبذة عن نادي اتحاد العاصمة (USMA)</h2>
+                <p>
+                    تأسس **الاتحاد الرياضي لمدينة الجزائر (USMA)** يوم 5 يوليو 1937 في قلب حي "سوسارة" العريق بالقصبة، ليكون رمزاً من رموز الوطنية والمقاومة الجزائرية قبل الاستقلال. يُعتبر النادي أحد أعرق القلاع الرياضية وأكثرها شعبية في الجزائر، حيث اقترن اسمه بالكرة الجميلة والعصريّة والألقاب المحلية والقارية الجليلة.
+                </p>
+                <div class="about-info-grid">
+                    <div class="about-info-item">
+                        <span class="title">تاريخ التأسيس:</span>
+                        <span class="value">5 يوليو 1937</span>
+                    </div>
+                    <div class="about-info-item">
+                        <span class="title">ألوان النادي:</span>
+                        <span class="value">الأحمر والأسود 🔴⚫</span>
+                    </div>
+                    <div class="about-info-item">
+                        <span class="title">اللقب الجماهيري:</span>
+                        <span class="value">أولاد سوسارة / ملوك العاصمة</span>
+                    </div>
+                    <div class="about-info-item">
+                        <span class="title">المقر الرئيسي:</span>
+                        <span class="value">سوسارة - الجزائر العاصمة</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بطاقة ملعب النادي -->
+            <div class="stadium-card">
+                <img src="stadium.jpg" alt="ملعب عمر حمادي بولوغين" class="stadium-img">
+                <div class="stadium-content">
+                    <h2>🏟️ معقل سوسارة - ملعب عمر حمادي (بولوغين)</h2>
+                    <p>
+                        يُعتبر <strong>ملعب عمر حمادي</strong> ببلدية بولوغين المسرح التاريخي والمعقل الروحي لنادي اتحاد العاصمة منذ استقلال الجزائر عام 1962. شُيّد الملعب عام 1935 ويُعرف بين الجماهير بـ <em>"سان سيرو الصغير" (Le petit San Siro)</em> لقربه من البحر وأجوائه الحماسية الاستثنائية التي تصنعها جماهير سوسارة في كل مباراة.
+                    </p>
+                    <div class="stadium-details">
+                        <div class="stadium-detail-item"><strong>الموقع:</strong> بولوغين، الجزائر العاصمة</div>
+                        <div class="stadium-detail-item"><strong>سنة التأسيس:</strong> 1935</div>
+                        <div class="stadium-detail-item"><strong>السعة:</strong> 17,500 متفرج</div>
+                        <div class="stadium-detail-item"><strong>الأرضية:</strong> عشب اصطناعي</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- واجهة ألقاب النادي -->
+    <main id="titles" class="page-section">
+        <div class="section-header">
+            <h2>خزانة ألقاب اتحاد العاصمة</h2>
+            <p style="color: #ccc;">سجل حافل بالبطولات والإنجازات التاريخية لملوك العاصمة</p>
+        </div>
+
+        <div class="titles-grid">
+            <div class="title-card">
+                <h3>كأس الجزائر <span>10 ألقاب</span></h3>
+                <p class="match-info">أعوام: 1981، 1988، 1997، 1999، 2001، 2003، 2004، 2013، 2025، 2026.</p>
+            </div>
+
+            <div class="title-card">
+                <h3>الرابطة المحترفة الأولى <span>8 ألقاب</span></h3>
+                <p class="match-info">أعوام: 1963، 1996، 2002، 2003، 2005، 2014، 2016، 2019.</p>
+            </div>
+
+            <div class="title-card">
+                <h3>كأس الكونفيدرالية الإفريقية <span>2 ألقاب</span></h3>
+                <p class="match-info">مواسم: 2022–23 و 2025–26.</p>
+            </div>
+
+            <div class="title-card">
+                <h3>كأس السوبر الإفريقي <span>لقب واحد</span></h3>
+                <p class="match-info">عام 2023 (أمام الأهلي المصري).</p>
+            </div>
+
+            <div class="title-card">
+                <h3>كأس السوبر الجزائري <span>2 ألقاب</span></h3>
+                <p class="match-info">أعوام: 2013، 2016.</p>
+            </div>
+
+            <div class="title-card">
+                <h3>كأس العرب للأندية الأبطال <span>لقب واحد</span></h3>
+                <p class="match-info">عام 2013.</p>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="showPage('home')" style="margin-top: 20px;">العودة للرئيسية</button>
+    </main>
+
+    <!-- واجهة أساطير اتحاد العاصمة -->
+    <main id="legends" class="page-section">
+        <div class="section-header">
+            <h2>أساطير اتحاد العاصمة</h2>
+            <p style="color: #ccc;">رموز ونجوم صنعوا أمجاد النادي عبر التاريخ</p>
+        </div>
+
+        <div class="legends-grid">
+            <div class="legend-card eternal">
+                <h3>بلال بن حمودة <span class="badge gold">الفقيد الخالد 🕊️</span></h3>
+                <p class="legend-desc">الموهبة الفذة، المايسترو الخلوق ومعشوق أنصار اتحاد العاصمة. رحل عنا إثر حادث مروري أليم صيف 2022، تاركاً خلفه أخلاقاً عالية وبصمات لا تُنسى وأهدافاً رائعة بقيت ذكراها خالدة أبد الدهر في قلوب عائلة سوسارة.</p>
+            </div>
+
+            <div class="legend-card">
+                <h3>جمال كدو <span class="badge">قائد أسطوري</span></h3>
+                <p class="legend-desc">مدافع وقائد أسطوري لاتحاد العاصمة في ثمانينيات القرن الماضي، قاد النادي لتحقيق أول لقب في كأس الجزائر عام 1981 وسجل أهدافاً تاريخية بقيت خالدة في أذهان أنصار سوسارة.</p>
+            </div>
+
+            <div class="legend-card">
+                <h3>محمد الأمين زماموش <span class="badge">الأكثر مشاركة</span></h3>
+                <p class="legend-desc">حارس المرمى الأسطوري وصاحب الرقم القياسي كأكثر من شارك بقميص الاتحاد بـ 400+ مباراة. توج مع النادي بالعديد من الألقاب المحلية والقارية وكان السد المنيع لسنوات طويلة.</p>
+            </div>
+
+            <div class="legend-card">
+                <h3>طارق حاج عدلان <span class="badge">الهداف التاريخي</span></h3>
+                <p class="legend-desc">واحد من أفضل المهاجمين في تاريخ الكرة الجزائرية والنادي، قاد الهجوم العاصمي لسنوات وسجل أهدافاً حاسمة جلب بها بطولات الدوري كأس الجزائر للاتحاد.</p>
+            </div>
+
+            <div class="legend-card">
+                <h3>نصر الدين خوالد <span class="badge">صخرة الدفاع</span></h3>
+                <p class="legend-desc">المدافع والقائد السابق الذي قضى أكثر من 12 موسماً متواصلاً مع الفريق، وكان رمزاً للوفاء والقتالية في الملعب، محققاً البطولات المحلية والعربية رفقة النادي.</p>
+            </div>
+
+            <div class="legend-card">
+                <h3>عمار عمور <span class="badge">المايسترو</span></h3>
+                <p class="legend-desc">صانع الألعاب الاستثنائي الذي أمتع جماهير بولوغين بلمساته السحرية وتميز في تسديد الكرات الثابتة، وقاد الفريق لسيطرة محلية مميزة في بداية الألفية.</p>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="showPage('home')" style="margin-top: 20px;">العودة للرئيسية</button>
+    </main>
+
+    <!-- واجهة المجموعات المشجعة للألتراس -->
+    <main id="fans" class="page-section">
+        <div class="section-header">
+            <h2>المجموعات المشجعة (أولاد البهجة)</h2>
+            <p style="color: #ccc;">صناع الأجواء الاستثنائية والأغاني التاريخية في المدرجات</p>
+        </div>
+
+        <div class="fans-grid">
+            <div class="fan-card">
+                <h3>أولاد البهجة <span class="badge">Ouled El Bahdja</span></h3>
+                <p class="fan-desc">تعتبر العرّاب الأول والمصدر الأسطوري لأهازيج وأغاني مدرجات اتحاد العاصمة والكرة الجزائرية. أطلقت أشهر الأغاني التي تجاوزت حدود الرياضة لتصبح موروثاً شعبياً عاصمياً يتردد في كل مكان.</p>
+            </div>
+
+            <div class="fan-card">
+                <h3>ألجي أوفندر <span class="badge">Alger Offender</span></h3>
+                <p class="fan-desc">مجموعة الألتراس الشهيرة الملتزمة بدعم الفريق في جميع التنقلات داخل وخارج الجزائر، وتشتهر بتنظيم دخلات (التيفو) العبقرية و"الكراكاج" الناري الذي يزين مدرجات ملعب عمر حمادي و5 جويلية.</p>
+            </div>
+
+            <!-- بطاقة المتحدون العاصميون مع خاصية الضغط لتكبير الصور -->
+            <div class="fan-card clickable" onclick="openUnionistesModal()">
+                <h3>المتحدون العاصميون <span class="badge">Les Unionistes 🔍</span></h3>
+                <p class="fan-desc">تجمع من المشجعين الشغوفين المدافعين عن هوية وقيم النادي التاريخية، وتصنع لوحات وتشجيعات راقية تعكس الوفاء والحب الحقيقي لقميص الأحمر والأسود. <br><strong style="color: #e60000;">(اضغط هنا لمشاهدة الصور)</strong></p>
+            </div>
+
+            <div class="fan-card">
+                <h3>أنصار سوسارة <span class="badge">Soustara Fans</span></h3>
+                <p class="fan-desc">القاعدة الجماهيرية العريضة في حي سوسارة العريق وباب الوادي وقصبة الجزائر، والتي تشكل الروح الحقيقية لنادي اتحاد العاصمة وتنقل الشغف من جيل إلى جيل.</p>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="showPage('home')" style="margin-top: 20px;">العودة للرئيسية</button>
+    </main>
+
+    <!-- نافذة منبثقة لعرض صور مجموعة المتحدون العاصميون -->
+    <div id="unionistesModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeUnionistesModal()">&times;</span>
+            <h2 style="color: #e60000; margin-bottom: 10px;">Les Unionistes Algérois</h2>
+            <p style="color: #ccc; margin-bottom: 15px;">شعار وجماهير مجموعة المتحدون العاصميون في المدرجات</p>
+            <div class="modal-images-grid">
+                <img src="unionistes_logo.jpg" alt="شعار Les Unionistes">
+                <img src="unionistes_fans.jpg" alt="جماهير Les Unionistes في المدرجات">
+            </div>
+        </div>
+    </div>
+
+    <!-- واجهة جدول المباريات الشامل -->
+    <main id="matches" class="page-section">
+        <div class="section-header">
+            <h2>جدول كل مباريات اتحاد العاصمة (موسم 2026/2027)</h2>
+            <p style="color: #ccc;">نتائج المواجهات المكتملة ومواعيد جميع المباريات القادمة رسمياً</p>
+        </div>
+
+        <div class="matches-grid">
+            <!-- مرحلة الذهاب -->
+            <div class="match-card">
+                <h3>الجولة 1 <span class="badge played">انتهت</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد خنشلة ⚪</span>
+                    <span class="match-score">0 - 0</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الجمعة 4 سبتمبر 2026</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب حمام عمار - خنشلة</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الجولة 2 <span class="badge played">انتهت</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span class="match-score">2 - 0</span>
+                    <span>شبيبة الأبيار ⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 10 سبتمبر 2026</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي (بولوغين)</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الجولة 3 <span class="badge played">انتهت</span></h3>
+                <div class="match-teams">
+                    <span>أولمبيك أقبو 🔵</span>
+                    <span class="match-score">2 - 3</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** السبت 19 سبتمبر 2026</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 1 نوفمبر - أقبو</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الجولة 4 <span class="badge played">انتهت</span></h3>
+                <div class="match-teams">
+                    <span>مستقبل الرويسات 🟢</span>
+                    <span class="match-score">1 - 0</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 8 أكتوبر 2026</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 28 فبراير - ورقلة</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 5</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>شبيبة الساورة 🟡</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الثلاثاء 13 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 20:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي (بولوغين)</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 6</span></h3>
+                <div class="match-teams">
+                    <span>نجم بن عكنون ⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 15 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 20 أوت 1955</p>
+            </div>
+
+            <div class="match-card">
+                <h3>كأس الكونفيدرالية <span class="badge caf">التمهيدي 2 (ذهاب)</span></h3>
+                <div class="match-teams">
+                    <span>بانثرز FC ⚽</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الأحد 18 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 16:00</p>
+                <p class="match-info">🏟️ **المواجهة:** خارج الديار</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 7 (مؤجلة)</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>شباب بلوزداد 🔴⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 22 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 20:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 5 جويلية 1962</p>
+            </div>
+
+            <div class="match-card">
+                <h3>كأس الكونفيدرالية <span class="badge caf">التمهيدي 2 (إياب)</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>بانثرز FC ⚽</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الأحد 25 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 20:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 5 جويلية 1962</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 8</span></h3>
+                <div class="match-teams">
+                    <span>شبيبة القبائل 🟡🟢</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 29 أكتوبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب حسين آيت أحمد (تيزي وزو)</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 9</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>مولودية وهران 🔴⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 5 نوفمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 10 (الداربي)</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>مولودية الجزائر 🟢🔴</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الأحد 15 نوفمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب نيلسون مانديلا (براقي)</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 11</span></h3>
+                <div class="match-teams">
+                    <span>شباب تموشنت 🔵</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 19 نوفمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب مبارك بوسيف</p>
+            </div>
+
+            <div class="match-card">
+                <h3>كأس الجمهورية <span class="badge cup">الدور 32</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>ترجي مستغانم 🟢⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الجمعة 20 نوفمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 12</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>أولمبي الشلف 🔴⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 26 نوفمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 13</span></h3>
+                <div class="match-teams">
+                    <span>وفاق سطيف ⚪⬛</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 3 ديسمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 8 ماي 1945</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 14</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>اتحاد بسكرة 🟢⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 10 ديسمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 15 (ختام الذهاب)</span></h3>
+                <div class="match-teams">
+                    <span>بارادو AC 🟡</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 17 ديسمبر 2026</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب دار البيضاء</p>
+            </div>
+
+            <div class="match-card">
+                <h3>كأس السوبر الجزائري <span class="badge cup">النهائي الكبير</span></h3>
+                <div class="match-teams">
+                    <span>مولودية الجزائر 🟢🔴</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** السبت 2 يناير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب نيلسون مانديلا (براقي)</p>
+            </div>
+
+            <!-- مرحلة الإياب -->
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 16</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>اتحاد خنشلة ⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 14 يناير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 17</span></h3>
+                <div class="match-teams">
+                    <span>شبيبة الأبيار ⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 21 يناير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب الأبيار</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 18</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>أولمبيك أقبو 🔵</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 28 يناير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 19</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>مستقبل الرويسات 🟢</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 4 فبراير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 20</span></h3>
+                <div class="match-teams">
+                    <span>شبيبة الساورة 🟡</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 11 فبراير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب بشار</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 21</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>نجم بن عكنون ⚪</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 18 فبراير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 22</span></h3>
+                <div class="match-teams">
+                    <span>شباب بلوزداد 🔴⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 25 فبراير 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 5 جويلية 1962</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 23</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>شبيبة القبائل 🟡🟢</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 4 مارس 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 24</span></h3>
+                <div class="match-teams">
+                    <span>مولودية وهران 🔴⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 11 مارس 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب أحمد زبانة (وهران)</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 25 (الداربي)</span></h3>
+                <div class="match-teams">
+                    <span>مولودية الجزائر 🟢🔴</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 25 مارس 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب 5 جويلية 1962</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 26</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>شباب تموشنت 🔵</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 1 أبريل 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 27</span></h3>
+                <div class="match-teams">
+                    <span>أولمبي الشلف 🔴⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 15 أبريل 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب محمد بو مزراق</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 28</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>وفاق سطيف ⚪⬛</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 29 أبريل 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 29</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد بسكرة 🟢⚪</span>
+                    <span>VS</span>
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 6 مايو 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 15:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب العالية - بسكرة</p>
+            </div>
+
+            <div class="match-card">
+                <h3>الرابطة الأولى <span class="badge">الجولة 30 (الختام)</span></h3>
+                <div class="match-teams">
+                    <span>اتحاد العاصمة 🔴⚫</span>
+                    <span>VS</span>
+                    <span>بارادو AC 🟡</span>
+                </div>
+                <p class="match-info">📅 **التاريخ:** الخميس 13 مايو 2027</p>
+                <p class="match-info">⏰ **التوقيت:** 18:00</p>
+                <p class="match-info">🏟️ **الملعب:** ملعب عمر حمادي</p>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="showPage('home')" style="margin-top: 20px;">العودة للرئيسية</button>
+    </main>
+
+    <!-- واجهة تشكيلة اللاعبين والمدربين -->
+    <main id="squad" class="page-section">
+        <div class="section-header">
+            <h2>تشكيلة اتحاد العاصمة</h2>
+            <p style="color: #ccc;">قائمة اللاعبين والطاقم الفني لملوك العاصمة</p>
+        </div>
+
+        <div class="squad-grid">
+            <div class="squad-card">
+                <h3>الطاقم الفني <span class="badge">المدربين</span></h3>
+                <div class="squad-list">
+                    <ul>
+                        <li><span>المدرب الرئيسي: <strong>لامين ندياي (Lamine N'Diaye)</strong></span> ⚽</li>
+                        <li><span>مساعد المدرب: <strong>أرزقي رمان</strong></span> 📋</li>
+                        <li><span>مدرب الحراس: <strong>لمين الكاظم</strong></span> 🧤</li>
+                        <li><span>المعد البدني: <strong>كمال بوجنان</strong></span> 🏋️‍♂️</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="squad-card">
+                <h3>حراس المرمى <span class="badge">3 حراس</span></h3>
+                <div class="squad-list">
+                    <ul>
+                        <li><span>أسامة بنبوط</span> <span class="player-num">#25</span></li>
+                        <li><span>عبد المؤمن سيفور</span> <span class="player-num">#1</span></li>
+                        <li><span>كمال سوفي</span> <span class="player-num">#16</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="squad-card">
+                <h3>خط الدفاع <span class="badge">المدافعين</span></h3>
+                <div class="squad-list">
+                    <ul>
+                        <li><span>سعدي رضواني (القائد)</span> <span class="player-num">#19</span></li>
+                        <li><span>إلياس شتي</span> <span class="player-num">#23</span></li>
+                        <li><span>هيثم لوصيف</span> <span class="player-num">#12</span></li>
+                        <li><span>تشي مالون (Che Malone)</span> <span class="player-num">#4</span></li>
+                        <li><span>عماد الدين عزي</span> <span class="player-num">#5</span></li>
+                        <li><span>حسين دهيري</span> <span class="player-num">#13</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="squad-card">
+                <h3>خط الوسط <span class="badge">وسط الميدان</span></h3>
+                <div class="squad-list">
+                    <ul>
+                        <li><span>زكرياء دراوي</span> <span class="player-num">#6</span></li>
+                        <li><span>جلودي ليكونزا (Glody Likonza)</span> <span class="player-num">#11</span></li>
+                        <li><span>إسلام ميريلي</span> <span class="player-num">#8</span></li>
+                        <li><span>براهيم بن زازا</span> <span class="player-num">#14</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="squad-card">
+                <h3>خط الهجوم <span class="badge">المهاجمين</span></h3>
+                <div class="squad-list">
+                    <ul>
+                        <li><span>أحمد خالدي</span> <span class="player-num">#7</span></li>
+                        <li><span>رياض بن عياد</span> <span class="player-num">#9</span></li>
+                        <li><span>درامان كاماغاتي (Dramane Kamagaté)</span> <span class="player-num">#29</span></li>
+                        <li><span>حسام غشة</span> <span class="player-num">#27</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="showPage('home')" style="margin-top: 20px;">العودة للرئيسية</button>
+    </main>
+
+    <footer>
+        تصميم ومطوَّر بواسطة <strong>جليل</strong> | جميع الحقوق محفوظة © 2026
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(pageId).classList.add('active');
+
+            if (pageId === 'home') {
+                document.getElementById('nav-home').classList.add('active');
+            } else if (pageId === 'titles') {
+                document.getElementById('nav-titles').classList.add('active');
+            } else if (pageId === 'legends') {
+                document.getElementById('nav-legends').classList.add('active');
+            } else if (pageId === 'fans') {
+                document.getElementById('nav-fans').classList.add('active');
+            } else if (pageId === 'matches') {
+                document.getElementById('nav-matches').classList.add('active');
+            } else if (pageId === 'squad') {
+                document.getElementById('nav-squad').classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* التحكم بالنافذة المنبثقة لصور المتحدون العاصميون */
+        function openUnionistesModal() {
+            document.getElementById('unionistesModal').classList.add('active');
+        }
+
+        function closeUnionistesModal() {
+            document.getElementById('unionistesModal').classList.remove('active');
+        }
+
+        /* إغلاق النافذة عند الضغط خارجها */
+        window.onclick = function(event) {
+            var modal = document.getElementById('unionistesModal');
+            if (event.target == modal) {
+                closeUnionistesModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
